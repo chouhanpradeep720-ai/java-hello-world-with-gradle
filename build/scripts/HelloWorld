@@ -1,21 +1,5 @@
 #!/usr/bin/env sh
 
-#
-# Copyright 2015 the original author or authors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
 ##############################################################################
 ##
 ##  HelloWorld start up script for UN*X
@@ -80,7 +64,7 @@ case "`uname`" in
     ;;
 esac
 
-CLASSPATH=$APP_HOME/lib/jb-hello-world-0.1.0.jar:$APP_HOME/lib/joda-time-2.2.jar
+CLASSPATH=$APP_HOME/lib/jb-hello-world-1.1.2.0.jar:$APP_HOME/lib/joda-time-2.2.jar
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then
@@ -178,6 +162,10 @@ save () {
 APP_ARGS=$(save "$@")
 
 # Collect all arguments for the java command, following the shell quoting and substitution rules
+if $JAVACMD --add-opens java.base/java.lang=ALL-UNNAMED -version ; then
+    DEFAULT_JVM_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED $DEFAULT_JVM_OPTS"
+fi
+
 eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $HELLO_WORLD_OPTS -classpath "\"$CLASSPATH\"" hello.HelloWorld "$APP_ARGS"
 
 # by default we should be in the correct project dir, but when run from Finder on Mac, the cwd is wrong
