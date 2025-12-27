@@ -44,6 +44,12 @@ repositories {
 jar {
     baseName = 'jb-hello-world'
     version =  '1.1.2.0'
+
+    manifest { 
+      attributes( 
+          'Main-Class':'hello.HelloWorld'
+)
+}
 }
 // end::jar[]
 
